@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
+const { createToken } = require("../auth");
 
 const userSchema = new Schema({
     profileImageURL: {
@@ -46,7 +47,8 @@ userSchema.statics.verifyPassword = async function(email, password) {
     const user = await this.findOne({ email: email });
     if(!user) return false;
     const valid = await bcrypt.compare(password, user.password);
-    return valid;
+    const token = createToken(user);
+    return {valid, token};
 };
 
 const User = model("users", userSchema);
