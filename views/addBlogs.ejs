@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+</head>
+<body>
+    <%- include('./partials/navbar.ejs') %>
+    
+    <div class="container">
+        <form action="/blog/add-blog" method="post">
+            <label>
+                Title:
+                <input type="text" name="title" required>
+            </label>
+            <label>
+                Content:
+                <textarea name="content" required></textarea>
+            </label>
+            <button type="submit">Add</button>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
 const { cookieAuthentication } = require("./middlewares/authentication");
+const BLOG = require("./models/blog");
 const userRoute = require("./routes/user");
+const blogRoute = require("./routes/blog");
 
 const app = express();
 const PORT = 8080;
@@ -23,11 +25,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+    const allBlogs = await BLOG.find({}).sort( {createdAt: -1} );
     return res.render("index", {
-        user: req.user
+        title: "Home",
+        user: req.user,
+        blogs: allBlogs
     });
 });
 app.use("/user", userRoute);
+app.use("/blog", blogRoute);
 
 app.listen(PORT, () => console.log(`Server started at PORT: ${PORT}`));

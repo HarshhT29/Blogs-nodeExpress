@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link href="/css/tailwind.css" rel="stylesheet">
-    <title>BLOGS</title>
-</head>
+    <%- include('./partials/head.ejs') %>
 <body class="m-0 p-0 box-border">
     <%- include('./partials/navbar.ejs') %>
     
@@ -11,6 +8,7 @@
     <p class="mx-96 underline font-bold ">Tailwind also working</p>
 
     <%= JSON.stringify(user) %>
+    <%= JSON.stringify(blogs) %>
 
 </body>
 </html>
