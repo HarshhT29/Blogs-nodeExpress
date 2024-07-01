@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body class="m-0 p-0 box-border">
+    <%- include('./partials/navbar.ejs') %>
+    
+    <div class="container">
+        <div class="blog">
+            <h1><%= blog.title %></h1>
+            <pre><%= blog.content %></pre>
+        </div>
+        <div class="author">
+            <h2>Author</h2>
+            <%= blog.createdBy.name %>
+        </div>
+
+        <br><br>
+
+        <div class="comments">
+            <h1>Comments (<%= comments.length %>)</h1>
+            <% comments.forEach(comment => { %>
+                <div class="comment">
+                    <strong><%= comment.createdBy.name %>:</strong> 
+                    <pre><%= comment.content %></pre>
+                </div>
+            <% }) %>
+
+            <% if (locals.user) { %>
+                <form action="/blog/comment/<%= blog._id %>" method="post">
+                    <input type="text" name="content" required />
+                    <button type="submit">Add</button>
+                </form>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { createBlog } = require("../controllers/blogHandlers");
+const { createBlog, getBlogById, createComment } = require("../controllers/blogHandlers");
 const router = Router();
 
 router.get("/add-blog", (req, res) => {
@@ -7,5 +7,7 @@ router.get("/add-blog", (req, res) => {
 });
 
 router.post("/add-blog", createBlog);
+router.get("/:id", getBlogById);
+router.post("/comment/:blogId", createComment);
 
 module.exports = router;
