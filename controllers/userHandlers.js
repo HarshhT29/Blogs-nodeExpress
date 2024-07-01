@@ -11,6 +11,7 @@ const userRegistration = async (req, res) => {
             return res.status(400).render("register", { title: "Register", error: "Email already exists" });
         }
         await USER.create({
+            profileImage: `images/profile-images/uploads/${req.file.filename}`,
             name: body.name,
             email: body.email,
             password: body.password,

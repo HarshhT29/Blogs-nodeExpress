@@ -10,8 +10,11 @@ const createBlog = async (req, res) => {
         await BLOG.create({
             title: body.title,
             content: body.content,
-            createdBy: req.user._id
+            createdBy: req.user._id,
+            coverImage: `images/cover-images/uploads/${req.user._id}/${req.file.filename}`
         });
+        // console.log(req.body);
+        // console.log(req.file);
         return res.redirect("/");
     } catch(err) {
         console.error("error:", err);
@@ -35,7 +38,7 @@ const createComment = async (req, res) => {
         await COMMENT.create({
             content: req.body.content,
             blogId: req.params.blogId,
-            createdBy: req.user._id
+            createdBy: req.user._id,
         });
         return res.redirect(`/blog/${req.params.blogId}`);
     } catch(err) {

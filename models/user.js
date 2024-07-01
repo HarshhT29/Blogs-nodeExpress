@@ -3,9 +3,9 @@ const bcrypt = require("bcrypt");
 const { createToken } = require("../auth");
 
 const userSchema = new Schema({
-    profileImageURL: {
+    profileImage: {
         type: String,
-        default: "/images/userIcon.jpg"
+        default: "/images/profile-images/userIcon.jpg"
     },
     name: {
         type: String,

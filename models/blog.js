@@ -12,6 +12,10 @@ const blogSchema = new Schema({
     createdBy: {
         type: Schema.Types.ObjectId,
         ref: "users"
+    },
+    coverImage: {
+        type: String,
+        default: "/images/cover-images/defaultCoverImage.png"
     }
 }, { timestamps: true });
 
