@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const methodOverride  = require("method-override");
 
 const { cookieAuthentication } = require("./middlewares/authentication");
 const BLOG = require("./models/blog");
@@ -18,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cookieAuthentication("token"));
-
+app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, 'public')));
 
 

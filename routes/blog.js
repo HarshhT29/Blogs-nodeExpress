@@ -2,7 +2,7 @@ const { Router } = require("express");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
-const { createBlog, getBlogById, createComment } = require("../controllers/blogHandlers");
+const { createBlog, getBlogById, createComment, deleteBlog, deleteComment } = require("../controllers/blogHandlers");
 const router = Router();
 
 const storage = multer.diskStorage({
@@ -28,5 +28,7 @@ router.get("/add-blog", (req, res) => {
 router.post("/add-blog", upload.single("coverImage"), createBlog);
 router.get("/:id", getBlogById);
 router.post("/comment/:blogId", createComment);
+router.delete("/:id", deleteBlog);
+router.delete("/comment/:commentId", deleteComment);
 
 module.exports = router;
