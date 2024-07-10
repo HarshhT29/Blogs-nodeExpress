@@ -1,24 +1,27 @@
 <nav class="w-full h-14 bg-gray-700 border-b border-gray-200">
     <div class="wrapper flex flex-wrap items-center justify-between mx-auto p-4">
-        <div class="logo ml-5 text-white text-lg font-bold">LOGO</div>
+        <div class="logo ml-5 text-white text-lg font-bold">
+            <a href="/">BLOGO</a>
+        </div>
         <div class="routes flex items-center justify-between mr-4">
             <ul class="flex flex-row space-x-4">
                 <li><a href="/" class="text-white hover:text-gray-300">Home</a></li>
-                <% if(locals.user) { %>
+                <% if (locals.user) { %>
                     <li><a href="/blog/add-blog" class="text-white hover:text-gray-300">Add Blog</a></li>
                 <% } else { %>
                     <li><a href="/user/register" class="text-white hover:text-gray-300">Register</a></li>
                     <li><a href="/user/login" class="text-white hover:text-gray-300">Login</a></li>
                 <% } %>
             </ul>
-            <% if(locals.user) { %>
-                <div class="dropDown relative ml-4">
-                    <button class="btn text-white hover:text-gray-300 focus:outline-none"
+            <% if (locals.user) { %>
+                <div class="dropDown relative ml-4 flex items-center">
+                    <button class="profile-image text-white w-8 h-8 rounded-full flex items-center justify-center mr-2" style="background-color: <%= user.color %>;"
                         onclick="document.getElementById('dropdown').classList.toggle('hidden')">
-                        <%= user.name %>
+                        <%= user.name.charAt(0).toUpperCase() %>
                     </button>
                     <div id="dropdown"
-                        class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20">
+                        class="hidden absolute top-8 -right-6 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20">
+                        <span class="block px-4 py-2 text-gray-800 hover:bg-gray-100"><%= user.name %></span>
                         <a href="/user/logout" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Log Out</a>
                     </div>
                 </div>

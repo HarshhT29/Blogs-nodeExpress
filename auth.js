@@ -7,7 +7,8 @@ const createToken = (user) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        role: user.role
+        role: user.role,
+        color: user.color
     };
     return JWT.sign(payload, secret);
 }

@@ -6,12 +6,8 @@
 <body class="bg-gray-100">
     <%- include("./partials/navbar.ejs") %>
     <div class="container mx-auto flex flex-col items-center justify-center ">
-        <h1 class="my-2 font-bold text-3xl">Create an account</h1>
-        <form action="/user/register" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center w-full max-w-sm bg-white border-2 rounded-lg border-gray-300 shadow-lg p-6 space-y-2">
-            <label for="profileImage" class="block w-full">
-                <span class="block text-gray-700 font-medium mb-2">Profile Image</span>
-                <input type="file" name="profileImage" required class="w-full border-2 rounded-lg p-2" />
-            </label>
+        <h1 class="my-4 font-bold text-3xl">Create an account</h1>
+        <form action="/user/register" method="post" class="flex flex-col items-center justify-center w-full max-w-sm bg-white border-2 rounded-lg border-gray-300 shadow-lg p-6 space-y-4">
             <label for="name" class="block w-full">
                 <span class="block text-gray-700 font-medium mb-2">Name</span>
                 <input type="text" name="name" required class="w-full border-2 rounded-lg p-2" />

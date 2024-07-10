@@ -1,5 +1,15 @@
 const USER = require("../models/user");
 
+const getRandomColor = () => {
+    const string = "6789ABCD";
+    let color = '#';
+    for(let i=0;i<6;i++) {
+        let index = Math.floor(Math.random()*string.length);
+        color+= string[index];
+    }
+    return color;
+};
+
 const userRegistration = async (req, res) => {
     const body = req.body;
     if(!body.name || !body.email || !body.password) {
@@ -10,11 +20,12 @@ const userRegistration = async (req, res) => {
         if(existingUser) {
             return res.status(400).render("register", { title: "Register", error: "Email already exists" });
         }
+        let userColor = getRandomColor();
         await USER.create({
-            profileImage: `images/profile-images/uploads/${req.file.filename}`,
             name: body.name,
             email: body.email,
             password: body.password,
+            color: userColor
         });
         return res.redirect("/user/login");
     } catch (err) {

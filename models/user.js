@@ -3,10 +3,6 @@ const bcrypt = require("bcrypt");
 const { createToken } = require("../auth");
 
 const userSchema = new Schema({
-    profileImage: {
-        type: String,
-        default: "/images/profile-images/userIcon.jpg"
-    },
     name: {
         type: String,
         required: true
@@ -27,6 +23,10 @@ const userSchema = new Schema({
         type: String,
         enum: ["ADMIN", "USER"],
         default: "USER"
+    },
+    color: {
+        type: String,
+        default: "red"
     }
 }, { timestamps: true });
 
