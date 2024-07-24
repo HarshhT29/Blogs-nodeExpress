@@ -27,7 +27,7 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
 app.get("/", async (req, res) => {
-    const allBlogs = await BLOG.find({}).sort({ createdAt: -1 });
+    const allBlogs = await BLOG.find({}).populate("createdBy", "name").sort({ createdAt: -1 });
     return res.render("index", {
         title: "Home",
         user: req.user,

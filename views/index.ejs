@@ -4,17 +4,24 @@
 <body class="m-0 p-0 box-border">
     <%- include('./partials/navbar.ejs') %>
     
-    <div class="container blogs">
-        <% if(blogs.length > 0) { %>
-            <% blogs.forEach(blog => { %>
-            <a class="single" href="/blog/<%= blog._id  %>">
-                <img src="<%= blog.coverImage %>" />
-                <h3 class="title"><%= blog.title %></h3>
-            </a>
-            <% }) %>    
-        <% } else { %>
-            <p>NO BLOGS TO DISPLAY</p>
-        <% } %>
+    <div class="container">
+        <div class="blogCard flex flex-wrap m-12">
+            <% if(blogs.length > 0) { %>
+                <% blogs.forEach(blog => { %>
+                <div class="card w-72 m-12 p-4 border-2 rounded-xl">
+                    <a class="single" href="/blog/<%= blog._id  %>">
+                        <img src="<%= blog.coverImage %>" class="w-full h-48 p-2 object-cover rounded-t-xl" />
+                        <div class="cardBody p-4">
+                            <h3 class="title text-xl font-semibold mb-2"><%= blog.title %></h3>
+                            <h4 class="italic text-right text-gray-600"> -<%= blog.createdBy.name %></h4>
+                        </div>
+                    </a>
+                </div>
+                <% }) %>    
+            <% } else { %>
+                <p class="text-center mt-5 font-bold italic">NO BLOGS TO DISPLAY</p>
+            <% } %>
+        </div>
     </div>
 
 </body>

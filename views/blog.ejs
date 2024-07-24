@@ -1,48 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include('./partials/head.ejs') %>
-<body class="m-0 p-0 box-border">
-    <%- include('./partials/navbar.ejs') %>
+<body class="m-0 p-0 box-border bg-gray-100 text-gray-800 font-poppins">
+    <%- include('./partials/navbar.ejs') %> 
     
-    <div class="container">
-        <% if(locals.blog) { %>
-            <div class="blog">
-                <h1><%= blog.title %></h1>
-                <pre><%= blog.content %></pre>
-            </div>
-            <div class="author">
-                <h2>Author</h2>
-                <%= blog.createdBy.name %>
-            </div>
-        <% } %>
+    <div class="container mx-auto px-28 py-10">
+        <div class="contentBox bg-white rounded-2xl shadow-md p-6">
+            <% if(locals.blog) { %>
+                <div class="blog mb-6">
+                    <h1 class="font-bold text-xl"><%= blog.title %></h1>
+                    <pre class="text-wrap"><%= blog.content %></pre>
+                </div>
+                <div class="author text-right">
+                    <h2 class="font-bold">Author</h2>
+                    <span class="italic text-gray-500">~<%= blog.createdBy.name %></span>
+                </div>
+            <% } %>
+        </div>
 
         <% if (locals.user && locals.user._id.toString() === blog.createdBy._id.toString()) { %>
-            <form action="/blog/<%= blog._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this blog?');">
-                <button type="submit" class="btn btn-danger">Delete</button>
+            <form action="/blog/<%= blog._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this blog?');" 
+                class="text-right mt-4">
+                <button type="submit" class="btn px-4 bg-red-600 hover:bg-red-500 rounded-lg text-white py-2">Delete</button>
             </form>
         <% } %>
 
-        <br><br>
+        <br><br>  
 
-        <div class="comments">
+        <div class="comments ">
             <h1>Comments (<%= comments.length %>)</h1>
             <% comments.forEach(comment => { %>
-                <div class="comment">
-                    <strong><%= comment.createdBy.name %>:</strong> 
+                <div class="comment rounded my-4 shadow-md bg-white px-6 py-3">
+                    <strong><%= comment.createdBy.name %></strong> 
                     <pre><%= comment.content %></pre>
 
                     <% if(locals.user && locals.user._id.toString() === comment.createdBy._id.toString()) { %>
                         <form action="/blog/comment/<%= comment._id %>?_method=DELETE" method="post" onsubmit="return confirm('Are you sure you want to delete this comment?');">
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger  bg-red-600 hover:bg-red-500 rounded text-white py-1 px-4 text-xs">Delete</button>
                         </form>
                     <% } %>
                 </div>
             <% }) %>
 
             <% if (locals.user) { %>
-                <form action="/blog/comment/<%= blog._id %>" method="post">
-                    <input type="text" name="content" required />
-                    <button type="submit">Add</button>
+                <form action="/blog/comment/<%= blog._id %>" method="post" class="mt-4">
+                    <input type="text" name="content" required class="border-2 rounded h-full" />
+                    <button type="submit" class="bg-green-500 rounded px-4 py-1 hover:bg-green-400 text-sm">Add</button>
                 </form>
             <% } %>
         </div>
